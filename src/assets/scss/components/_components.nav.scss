@@ -1,0 +1,130 @@
+///* ========================================================================
+//   #NAV
+//   ======================================================================== */
+
+.nav {
+	position: absolute;
+	width: 100%;
+	z-index: 60;
+	background: $c-white;
+	display: flex;
+	
+	&__content {
+		margin-left: 175px;
+		align-items: center;
+	}
+	
+	&__brand {
+		position: absolute;
+		display: block;
+		width: 175px;
+		height: 175px;
+		padding: 1rem;
+		background: $c-white;
+
+		@include mq(m) {
+			width: 125px;
+			height: 125px;
+		}
+		
+		img {
+			width: 100%;
+		}
+	}
+	
+	&__navbar {
+		display: flex;
+		
+		@include mq(m) {
+			padding: 1rem;
+
+			li {
+				display: none;
+			}
+		}
+	}
+	
+	li {
+		position: relative;
+		
+		a {
+			display: block;
+			color: lighten($c-font, 15%);
+			padding: 1.1rem;
+			@include transition($e: $easeInOutCubic);
+			
+			&:hover {
+				color: $c-primary;
+			}
+		}
+	}
+}
+
+.menu-trigger {
+	position: fixed;
+	top: 0;
+	right: 0;
+	z-index: 75;
+	padding: 2rem;
+	background: $c-white;
+	cursor: pointer;
+	display: none;
+
+	@include mq(m) {
+		display: block;
+	}
+
+	span {
+		display: block;
+		height: 3px;
+		width: 35px;
+		background: $c-grey;
+		margin-bottom: 5px;
+		@include transition();
+	}
+}
+
+.menu-trigger.is--active {
+	
+	.top {
+		transform: translateY(8px) rotate(225deg);
+	}
+
+	.middle {
+		opacity: 0;
+	}
+
+	.bottom {
+		transform: translateY(-8px) rotate(-45deg);
+	}
+}
+
+.menu {
+	position: fixed;
+	z-index: 70;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	height: 100vh;
+	width: 100vw;
+	background: $c-white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	@include transition();
+
+	a {
+		display: block;
+		font-size: $h4;
+		padding: 1rem;
+		font-weight: bold;
+		color: $c-grey;
+	}
+}
+
+.menu.is--active {
+	opacity: 1;
+	visibility: visible;
+	pointer-events: all;
+}

@@ -1,0 +1,96 @@
+.hero {
+	background: $c-grey-darkest;
+	background-image: url('https://res.cloudinary.com/darkroast-digital/image/upload/v1510152419/fortis/hero.jpg'); 
+	@include cover();
+	@include hw();
+	display: flex;
+	position: relative;
+	
+	&__content {
+		position: absolute;
+		z-index: 10;
+		top: 50%;
+		padding: 2rem;
+		max-width: 800px;
+
+		@include mq(m) {
+			top: auto;
+			bottom: 20px;
+			padding:  1rem;
+		}
+
+		&-background {
+			position: absolute;
+			background: $c-primary;
+			mix-blend-mode: multiply;
+
+			@include mq(s) {
+				margin-top:-20px;
+				height:200px !important;
+			}
+		}
+		
+		h1 {
+			text-transform: uppercase;
+			color: #fff;
+			margin-bottom: 0;
+			font-size: $h1 * 1.5;
+			line-height: 1.2;
+			margin-bottom: 0;
+
+			@include mq(m) {
+				font-size: $h3;
+			}
+
+			@include mq(s) {
+				font-size:$h4;
+			}
+
+			span {
+				color: #96D3F5;
+			}
+		}
+		
+		h6 {
+			margin-top: 0;
+			max-width: 80%;
+			line-height: $h5;
+			text-transform: none;
+			color: $c-white;
+			margin-bottom: 0;
+			font-weight: normal;
+
+			@include mq(m) {
+				font-weight: normal;
+				font-size: .75rem;
+			}
+		}
+	}
+}
+
+.hero-socials {
+	position: absolute;
+	z-index: 70;
+	top: 25%;
+	left: 10px;
+
+	@include mq(xl) {
+		top: 20%;
+	}
+
+	@include mq(m) {
+		display: none;
+	}
+
+	a {
+		color: $c-grey;
+		display: block;
+		padding: .5rem;
+		font-size: 1.5rem;
+		@include transition();
+
+		&:hover{
+			color: $c-primary;
+		}
+	}
+}

@@ -1,0 +1,3235 @@
+// *********************************************************************
+// *********************************************************************
+// *********************************************************************
+
+// GENERIC
+@import 'generic/_generic.box-sizing';
+@import 'generic/_generic.reset';
+
+//SETTINGS
+@import 'settings/_settings.breakpoints';
+@import 'settings/_settings.colours';
+@import 'settings/_settings.easings';
+@import 'settings/_settings.percents';
+@import 'settings/_settings.typography';    
+
+//THEME
+@import 'theme/_theme.colours';  
+
+//TOOLS
+@import 'tools/_tools.css-locks';
+@import 'tools/_tools.align';
+@import 'tools/_tools.background-cover';
+@import 'tools/_tools.clearfix';
+@import 'tools/_tools.flex-left-right';  
+@import 'tools/_tools.height-width';
+@import 'tools/_tools.image-cover';
+@import 'tools/_tools.lead-paragraph';
+@import 'tools/_tools.media-queries';  
+@import 'tools/_tools.radius';  
+@import 'tools/_tools.selection';     
+@import 'tools/_tools.shadows';
+@import 'tools/_tools.transition';    
+@import 'tools/_tools.edit'; 
+
+//UTILITIES
+@import 'utilities/_utilities.grid';
+@import 'utilities/_utilities.typography';  
+
+//ELEMENTS   
+@import 'elements/_elements.buttons';
+
+//COMPONENTS
+@import 'components/_components.accordion';                   
+@import 'components/_components.hero';     
+@import 'components/_components.modal';    
+@import 'components/_components.nav';  
+@import 'components/_components.tabs';    
+@import 'components/_components.form';    
+  
+//VENDORS
+
+@import 'vendors/decolines';
+@import 'vendors/slick';     
+
+// Helpers ==============================================================
+
+//@include edit();
+
+@include selection();
+
+// **********************************************************************
+// **********************************************************************
+// **********************************************************************
+
+body::-webkit-scrollbar {
+    width: .3rem;
+}
+ 
+body::-webkit-scrollbar-track {
+    background: transparent;
+    background-color: $c-grey;
+}
+ 
+body::-webkit-scrollbar-thumb {
+  background-color: $c-grey-darkest;
+}
+
+body {
+    background: $c-grey-darkest;
+    overflow-x: hidden;
+}
+
+p.lead {
+    font-size: $h6;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+@include mq(s) {
+    .lead-div {
+        display:flex;
+        flex-direction:column;
+    }
+    .hp-about__content {
+        iframe {
+            max-width:100%;
+            margin-bottom:1rem;
+        }
+    }
+}
+
+.loader {
+    position: fixed;
+    z-index: 100;
+    background: $c-grey-darkest;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include transition($e: cubic-bezier(.4,0,.2,1), $t: 700ms)
+}
+
+.loader.is--loaded {
+    transform: translateY(-100%);
+}
+
+.spinner-container {
+    position: relative;
+    transform: translateX(-50px);
+}
+
+.spinner {
+    width: 75px;
+    height: 10px;
+    background: $c-grey;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: center left;
+    animation: spinner 1.2s cubic-bezier(.4,0,.2,1) infinite forwards;
+}
+
+@keyframes spinner {
+    0% {      
+        transform: translate(0%) scaleX(0);
+    }
+    30% {       
+        transform: translate(0%) scaleX(1);
+    }
+    80% {      
+        transform: translate(100%) scaleX(0);
+    }
+    100% {     
+        transform: translate(100%) scaleX(0);
+    }
+}
+
+.main {
+    background: $c-white;
+    //overflow: hidden;
+    transform: translateY(20%);
+    @include transition($e: cubic-bezier(.4,0,.2,1), $t: 800ms);
+}
+
+.main.is--loaded {
+    transform: translateY(0);
+}
+
+//
+//
+// Borders
+//
+//
+
+.borders {
+    position: absolute;
+    z-index: 50;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+    
+.border-left {
+    height: 100vh;
+    background: $c-white;
+    position: absolute;
+    top: 0;
+    left: 0;
+} 
+
+.border-right {
+    height: 100vh;
+    background: $c-white;
+    position: absolute;
+    top: 0;
+    right: 0;
+}  
+
+.border-bottom {
+    width: 100vw;
+    background: $c-white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+} 
+
+//
+//
+// HP About
+//
+//
+
+.hp-about {
+    @include container($maw: 960px);
+    position: relative;
+}
+
+.about-title {
+    display: flex;
+    align-items: center;
+    padding-top: $h4;
+    position: relative;
+
+    @include mq(m) {
+        align-items: center;
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        width: 300px;
+        height: 1px;
+        background: $c-grey;
+        top: auto;
+        left: -350px;
+
+        @include mq(m) {
+            display: none;
+        }
+    }
+
+    > h2 {
+        color: $c-primary;
+        font-size: $h1 * 2;
+        margin-top: 0;
+        line-height: 0;
+        margin-right: 1rem;
+        margin-bottom: 0;
+
+        @include mq(m) {
+            font-size: $h2;
+
+        }
+    }
+}
+
+.title-pattern {
+    
+    h2 {
+        color: $c-grey-dark; 
+        margin-bottom: 0;
+
+         @include mq(m) {
+            font-size: $h4;
+            line-height: 1;
+        }  
+    }
+
+    h6 {
+        margin-top: 1rem;
+        font-size: $h5;
+    }
+}
+
+.hp-about__content  {
+    margin-left: -5rem;
+    max-width: 85%;
+
+    @include mq(m) {
+        max-width: 100%;
+        margin-left: 0;
+    }
+
+    > h6 {
+        color: $c-grey-dark;
+        font-size: $h4;
+        font-weight: 600;
+        margin-top: 0;
+
+        @include mq(m) {
+            font-size: $h5;
+        }
+
+        span { 
+            color: $c-primary;
+        }
+    }
+    
+    ul {
+        display: flex;
+        max-width: 80%;
+        margin-bottom: $vertical-rhythm;
+
+        li {
+            flex: 1 1 auto;
+            margin-right: 2rem;
+
+            &:last-of-type {
+                margin-right: 0;
+            }
+
+            img {
+                max-width: 100%;
+            }
+        }
+    }
+
+}
+
+.hp-about__image {
+    position: absolute;
+    top: 0;
+    right: -30%;
+    max-height: 100%;
+
+    @include mq(xl) {
+        right: -50%;
+    }
+
+    @include mq(m) {
+        display: none;
+    }
+}
+
+//
+//
+// Stats
+//
+//
+
+.stats {
+    padding: 4rem;
+    @include cover();
+    background-image: url('https://res.cloudinary.com/darkroast-digital/image/upload/v1510152415/fortis/counters-bg.jpg');
+    @include row();
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+
+    ul {
+        display: flex;
+        width: 100%;
+
+        @include mq(m) {
+            display: block;
+            padding: 2rem 0;
+        }
+
+        li {
+            flex: 1 1 auto;
+            text-align: center;
+
+            span {
+                display: block;
+                color: $c-secondary;
+                font-weight: 900;
+                font-size: $h1;
+                line-height: $h1;
+                margin-bottom: 1rem;
+            }
+        }
+    }
+}
+
+.stats-heading {
+    text-align: center;
+    color: $c-primary;
+    margin-bottom: 4rem;
+}
+
+//
+//
+// Projects
+//
+//
+
+.projects-title {
+    @include row();
+    align-items: center;
+    position: relative;
+    margin-bottom: $vertical-rhythm;
+
+    overflow-x:hidden;
+
+    &:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: -500px;
+        transform: translateY(-50%);
+        height: 1px;
+        width: 750px;
+        background: $c-grey;
+        z-index: -10;
+    }
+
+    .button {
+        @include button(secondary);
+        @include flex-right();
+        background: $c-white;
+    }
+ 
+    h2 {
+        color: $c-primary;
+    }
+}
+
+.project-item {
+    display: flex !important;
+
+    @include mq(m) {
+        display: block !important;
+    }
+}
+
+.project-images {
+    display: flex;
+    width: 50%;
+    margin-right: 2rem;
+
+    @include mq(m) {
+        width: 100%;
+        display: block;
+    }
+
+    img {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+}
+
+.image-gallery-one {
+    width: 33.3333%;
+    margin-right: 1rem;
+
+    @include mq(m) {
+        display: none;
+    }
+}
+
+.image-gallery-two {
+    width: 66.6666%;
+
+    @include mq(m) {
+        width: 100%;
+        margin-top: 200px;
+    }
+    
+    img {
+        height: calc(100% - 1rem);
+        width: 100%;
+        object-fit: cover;
+
+        @inclue mq(m) {
+            height: 200px;
+        }
+    }
+}
+
+.project-description {
+    width: 40%;
+    padding: 4rem;
+
+    @include mq(m) {
+        width: 100%;
+        padding: 1rem;
+        margin-bottom: -100px;
+    }
+
+    h4 {
+        color: $c-primary;
+    }
+
+    h6 {
+        margin-top: 0;
+    }
+}
+
+.slick-slide {
+    outline: none;
+
+    .project-description {
+        transform: translateY(-100px);
+        opacity: 0;
+        @include transition($e: cubic-bezier(0.7, 0, 0.3, 1));
+        transition-delay: 200ms;
+    }
+
+    .image-gallery-one {
+        transform: translateY(-100px);
+        opacity: 0;
+        @include transition($e: cubic-bezier(0.7, 0, 0.3, 1));
+    }
+
+    .image-gallery-two {
+        transform: translateY(-100px);
+        opacity: 0;
+        @include transition($e: cubic-bezier(0.7, 0, 0.3, 1));
+        transition-delay: 100ms;
+    }
+}
+
+.slick-slide.slick-active {
+    
+    .project-description,
+    .image-gallery-one,
+    .image-gallery-two {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.slick-dots {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+
+    @include mq(m) {
+        top: 70%;
+    }
+
+    button {
+        padding: 0;
+        height: 15px;
+        width: 15px;
+        border-radius: 50%;
+        border-color: $c-grey;
+        margin-bottom: 1rem;
+        @include transition($e: cubic-bezier(0.7, 0, 0.3, 1));
+
+        &:after,
+        &:before {
+            display: none;
+        }
+    }
+
+    .slick-active {
+
+        button {
+            background: $c-primary;
+            border-color: $c-primary;
+        }
+    }
+}
+
+//
+//
+// Hp CTA
+//
+//
+
+.hp-cta {
+    padding: 4rem;
+    @include cover();
+    background-image: url('https://res.cloudinary.com/darkroast-digital/image/upload/v1510152415/fortis/hp-cta.jpg');
+    @include row();
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $c-white;
+    flex-direction: column;
+
+    @include mq(m) {
+        display: block;
+        text-align: center;
+        padding: 2rem;
+    }
+
+    @include mq(s) {
+        overflow-x:hidden;
+    }
+
+    h4 {
+        span {
+            display: block;
+        }
+
+        @include mq(m) {
+            margin-top: 0;
+        }
+    }
+
+    p {
+        max-width: 50%;
+
+        @include mq(m) {
+            max-width: 100%;
+        }
+    }
+
+    .button-group {
+        position: relative;
+
+        &:before,
+        &:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100px;
+            height: 1px;
+            background: $c-white;
+        }
+
+        &:before {
+            left: -120px;
+        }
+
+        &:after {
+            right: -120px;
+        }
+    }
+
+    .button {
+        @include button(secondary);
+        border: none;
+        color: $c-white;
+
+        &:after,
+        &:before {
+            background: $c-white;
+        }
+
+        span {
+            &:after,
+            &:before {
+                background: $c-white;
+            }
+        }
+    }
+}
+
+//
+//
+// Clients
+//
+//
+
+.clients {
+    @include row($direction: column);
+    align-items: center;
+    margin-bottom: 4rem;
+
+    h6 {
+        font-weight: 600;
+    }
+    
+    h4 {
+        margin-top: 0;
+        color: $c-primary;
+    }
+
+    ul {
+        width: 100%;
+
+        img {
+            //height: 50%;
+            width: 50%;
+            //object-fit: cover;
+        }
+    }
+}
+
+//
+//
+// Hp Contact
+//
+//
+
+.hp-contact {
+    padding: 4rem;
+    @include cover();
+    background-image: url('https://res.cloudinary.com/darkroast-digital/image/upload/v1510152415/fortis/clients-bg.jpg');
+    position: relative;
+    color: $c-white;
+
+    &-content {
+        padding: 2rem;
+    }
+}
+
+.hp-contact-content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+
+    @include mq(m) {
+        display: block;
+    }
+
+    @include mq(s) {
+        padding:1rem;
+    }
+}
+
+.contact-details {
+    //width: 33.3333%;
+
+    @include mq(m) {
+        width: 100%;
+    }
+
+    a {
+        color: $c-white;
+    }
+    
+    h6 {
+        margin-left: 3rem;
+    }
+
+    @include mq(s) {
+        h2 {
+            margin-left:-1rem;
+        }
+    }
+
+    p {
+        display: flex;
+        margin-left: 3rem;
+        
+        img {
+            margin-right: .5rem;
+        }
+    }
+
+    &__list {
+        display: flex;
+
+        @include mq(s) {
+            flex-direction:column;
+            margin-left:-3rem;
+        }
+    }
+}
+
+.hp-form {
+    width: 66.6666%;
+    padding-top: 5rem;
+
+    @include mq(m) {
+        width: 100%;
+        padding-top: 1em;
+    }
+}
+
+.hp-contact-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: $c-primary;
+    mix-blend-mode: multiply;
+    z-index: 0;
+
+    @include mq(s) {
+        height:85% !important;
+        width:90% !important;
+        left:5% !important;
+    }
+}
+
+
+.form-group {
+    position: relative;
+    flex: 1 1 auto;
+    margin-bottom: 1rem;
+    margin-right: $vertical-rhythm;
+
+    @include mq(m) {
+        margin-right: 0;
+    }
+
+    &:last-of-type {
+        margin-right: 0;
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: $c-white;
+        transform: scaleX(0);
+        @include transition();
+        transform-origin: left;
+    }
+
+    label {
+        position: absolute;
+        pointer-events: none;
+        left: .5rem;
+        @include transition($e: cubic-bezier(.4,0,.2,1), $t: 300ms);
+    }
+    
+    input,
+    textarea {
+        border: none;
+        width: 100%;
+        padding: 0 .5rem;
+        border-bottom: solid 1px $c-grey;
+
+        &:focus {
+            border-bottom: solid 1px $c-grey;
+        }
+    }
+
+    input::-webkit-file-upload-button {
+        background: $c-white;
+        border: none;
+        padding: 5px 15px;
+        margin-bottom: 10px;
+        color: $c-primary;
+        border-radius: 50px;
+        cursor: pointer;
+        outline: none;
+    }   
+}
+
+.form-group.is--textarea {
+       &:after {
+        content: '';
+        position: absolute;
+        bottom: 8px;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: $c-primary;
+        transform: scaleX(0);
+        @include transition($e: cubic-bezier(.4,0,.2,1), $t: 200ms);
+        transform-origin: left;
+    } 
+}
+
+.form-group.is--typed {
+
+    &:after {
+        transform: scaleX(1);
+    }
+
+    label {
+        transform: translateY(-1.5rem);
+        font-size: .75rem;
+        color: $c-white;
+    }
+}
+
+.uniform__potty {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+}
+
+.submit {
+    color: $c-white;
+    border: none;
+
+    &:before,
+    &:after {
+        background: $c-white;
+    }
+}
+
+//
+//
+// Footer
+//
+//
+
+.footer {
+    background: $c-grey-lightest;
+    padding: 2rem;
+}
+
+.footer-content {
+    @include row();
+
+    @include mq(m) {
+        display: block;
+    }
+}
+
+.footer-logo {
+    width: size(1/3);
+    margin-right: 2rem;
+
+    @include mq(m) {
+        width: 100%;
+    }
+
+    img {
+        max-width: 100%;
+
+        @include mq(xl) {
+            max-width: 80%;
+        }
+    }
+}
+
+.footer-nav {
+    width: size(2/4);
+    margin-right: 2rem;
+
+    @include mq(m) {
+        width: 100%;
+    }
+
+    ul {
+        display: flex;
+
+        @include mq(m) {
+            display: block;
+        }
+
+        a {
+            text-transform: uppercase;
+            display: block;
+            padding: 1rem;
+            color: $c-grey;
+            @include transition();
+
+            i {
+                font-size: 1.5rem;
+            }
+
+            &:hover {
+                color: $c-primary;
+            }
+        }
+    }
+
+    .footer-social {
+        display: flex;
+
+        @include mq(m) {
+            display: flex;
+        }
+    }
+}
+
+
+
+.footer-copyright {
+    width: size(1/4);
+    text-align: right;
+
+    @include mq(m) {
+        width: 100%;
+    }
+
+    hr {
+        margin: 1rem 0;
+    }
+
+    ul {
+        display: flex;
+
+        li {
+
+            &:first-of-type {
+                margin-right: 1rem;
+            }
+
+            a {
+                    color: $c-grey;
+                    @include transition();
+
+                    &:hover {
+                        color: $c-primary;
+                    }
+                }
+        }
+    }
+}
+
+//
+//
+// About Page
+//
+//
+
+.offpage-hero {
+    height: 70vh;
+
+    .borders {
+        height: 70vh;
+    }
+
+    .hero-socials {
+        top: 35%;
+    }
+
+    .hero__content {
+        top: auto;
+        bottom: 50px;
+        max-width: 60%;
+
+        @include mq(s) {
+            bottom:15px;
+
+            &-background {
+                top:42% !important;
+            }
+        }
+    }
+}
+
+//
+
+.about-hero {
+    background-image: url('https://res.cloudinary.com/darkroast-digital/image/upload/v1510152415/fortis/about-hero.jpg');
+}
+
+//
+//
+// About CTA
+//
+//
+
+.about-cta {
+    padding: 4rem;
+    @include cover();
+    background-image: url('https://res.cloudinary.com/darkroast-digital/image/upload/v1510152415/fortis/about-cta.jpg');
+    @include row();
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $c-white;
+    flex-direction: column;
+
+    @include mq(m) {
+        padding: 4rem;
+    }
+
+    @include mq(s) {
+        overflow-x:hidden;
+    }
+
+    h4 {
+        span {
+            display: block;
+        }
+    }
+
+    .button-group {
+        position: relative;
+
+        &:before,
+        &:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100px;
+            height: 1px;
+            background: $c-white;
+        }
+
+        &:before {
+            left: -120px;
+        }
+
+        &:after {
+            right: -120px;
+        }
+    }
+
+    .button {
+        @include button(secondary);
+        border: none;
+        color: $c-white;
+
+        &:after,
+        &:before {
+            background: $c-white;
+        }
+
+        span {
+            &:after,
+            &:before {
+                background: $c-white;
+            }
+        }
+    }
+}
+
+.about-intro {
+
+    &-content {
+        @include container();
+    }
+
+    &-video {
+        width: 33.3333%;
+        text-align: right;
+        margin-bottom: 2rem;
+
+        @include mq(m) {
+            width: 100%;
+            text-align: left;
+            order: 2;
+        }
+
+        @include mq(s) {
+            iframe {
+                max-width:100%;
+            }
+        }
+
+        h4 {
+            font-weight: normal;
+            color: $c-grey-darker;
+            margin-bottom: 0;
+            margin-top: 0;
+        }
+
+        h6 {
+            margin-top: 0;
+        }
+    }
+
+    &-info {
+        display: flex;
+
+        @include mq(m) {
+            flex-direction: column;
+        }
+
+        &__content {
+            width: calc(66.6666% - 4rem);
+            margin-left: 4rem;
+
+            @include mq(m) {
+                width: 100%;
+                margin-left: 0;
+            }
+        }
+
+        img {
+            max-width: 40%;
+            margin-bottom: 2rem;
+
+            @include mq(m) {
+                max-width: 70%;
+                margin-bottom: 2rem;
+            }
+        }
+    }
+}
+
+.about-intro-cta {
+    background: $c-primary;
+    padding: 2rem;
+    color: $c-white;
+
+    p {
+        margin-bottom: 0;
+    }
+
+    margin-bottom: $vertical-rhythm;
+}
+
+.tabs-title {
+    @include container();
+    position: relative;
+
+    h4 {
+        margin-bottom: 0;
+        font-weight: normal;
+        color: $c-grey-darker;
+    }
+
+    h6 {
+        margin-top: 0;
+        font-weight: normal;
+        text-transform: none;
+        color: $c-primary;
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: -400px;
+        transform: translateY(-50%);
+        height: 1px;
+        width: 800px;
+        background: $c-grey;
+
+        @include mq(m) {
+            display: none;
+        }
+    }
+}
+
+.tabs {
+    @include row();
+    
+    @include mq(m) {
+        display: block;
+    }
+}
+
+.tabs__nav {
+    position: relative;
+    padding-left: 4rem;
+
+    &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 50px;
+        height: 100%;
+        width: 1px;
+        background: $c-grey;
+    }
+
+    li {
+        position: relative;
+
+        &:before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -5px;
+            transform: translateY(-50%);
+            height: 10px;
+            width: 10px;
+            border: solid 1px $c-grey;
+            border-radius: 50%;
+            @include transition();
+        }
+    }
+
+    .active {
+        color: $c-primary;
+
+        &:before {
+            border-color: $c-primary;
+            background: $c-primary;
+        }
+    }
+}
+
+.tab__content {
+    display: flex;
+    
+    @include mq(m) {
+        display: block;
+    }
+
+    p {
+        width: 50%;
+
+        @include mq(m) {
+            width: 100%;
+        }
+    }
+
+    .tab-image {
+        width: calc(50% - 2rem);
+        height: 250px;
+        margin-left: 2rem;
+
+        @include mq(m) {
+            width: 100%;
+            margin-left: 0;
+            margin-bottom: 2rem;
+        }
+
+        img {
+            max-width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+}
+
+.tabs__container {
+    @include mq(s) {
+        width:100%;
+    }
+}
+
+.tabsalt-title {
+    @include container();
+    position: relative;
+
+    h4 {
+        margin-bottom: 0;
+        font-weight: normal;
+        color: $c-grey-darker;
+    }
+
+    h6 {
+        margin-top: 0;
+        font-weight: normal;
+        text-transform: none;
+        color: $c-primary;
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: -400px;
+        transform: translateY(-50%);
+        height: 1px;
+        width: 800px;
+        background: $c-grey;
+    }
+}
+
+.tabsalt {
+    @include row();
+
+    @include mq(m) {
+        display: block; 
+    }
+}
+
+.tabsalt__nav {
+    position: relative;
+    padding-left: 4rem;
+
+    &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 50px;
+        height: 100%;
+        width: 1px;
+        background: $c-grey;
+    }
+
+    li {
+        position: relative;
+
+        &:before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -5px;
+            transform: translateY(-50%);
+            height: 10px;
+            width: 10px;
+            border: solid 1px $c-grey;
+            border-radius: 50%;
+            @include transition();
+        }
+    }
+
+    .active {
+        color: $c-primary;
+
+        &:before {
+            border-color: $c-primary;
+            background: $c-primary;
+        }
+    }
+}
+
+.tabalt__content {
+    display: flex;
+
+    @include mq(m) {
+        display: block;
+    }
+
+    p {
+        width: 50%;
+
+        @include mq(m) {
+            width: 100%;
+        }
+    }
+
+    .tabalt-image {
+        width: calc(50% - 2rem);
+        height: 250px;
+        margin-left: 2rem;
+
+        @include mq(m) {
+            width: 100%;
+            margin-left: 0;
+        }
+
+        img {
+            max-width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+}
+
+.about-industries {
+    padding-bottom: 4rem;
+}
+
+.tabsalt__container {
+    @include mq(s) {
+        width:100%;
+    }
+}
+
+//
+//
+// Careers Page
+//
+//
+
+.careers-hero {
+    background-image: url('https://res.cloudinary.com/darkroast-digital/image/upload/v1510152415/fortis/careers-hero-2.jpg');
+}
+
+.careers-info {
+    @include row();
+
+    @include mq(m) {
+        display: block;
+    }
+
+    aside {
+        width: 25%;
+        padding-bottom: 2rem;
+
+        @include mq(m) {
+            width: 100%;
+            padding-bottom: 0;
+        }
+
+        .open-positions {
+            background: $c-grey-lightest;
+            padding: 1rem;
+        }
+
+        h6 {
+            margin: 0;
+            font-weight: normal;
+            color: $c-primary;
+        }
+
+        h4 {
+            margin-top: 0;
+            font-weight: normal;
+            color: $c-grey-darker;
+        }
+    }
+
+    article {
+        width: calc(75% - 2rem);
+        margin-left: 2rem;
+
+        @include mq(m) {
+            width: 100%;
+            margin-left: 0;
+        }
+    }
+}
+
+.position {
+
+    p {
+        margin-bottom: 0;
+    }
+
+    a {
+        color: $c-primary;
+        display: flex;
+        align-items: center;
+
+        i {
+            margin-left: .3rem;
+        }
+    }
+
+    hr {
+        margin: 1rem 0;
+    }
+}
+
+.careers-content {
+    padding-top: 4rem;
+    width: 70%;
+    position: relative;
+
+    @include mq(xl) {
+        width: 80%;
+    }
+
+    @include mq(s) {
+        width:100%;
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        z-index: 70;
+        top: -10%;
+        right: -120%;
+        height: 110%;
+        width: 110%;
+        background-image: url('https://res.cloudinary.com/darkroast-digital/image/upload/v1510152415/fortis/fist.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+
+        @include mq(xl) {
+            right: -120%;
+            height: 120%;
+            top: -15%;
+        }
+
+        @include mq(s) {
+            display:none;
+        }
+    }
+
+    ul {
+        display: flex;
+        flex-wrap: wrap;
+
+        li {
+            width: 33.3333%;
+            color: $c-primary;
+        }
+    }
+}
+
+.careers-cta {
+    background: $c-primary;
+    padding: 1rem;
+    color: $c-white;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.careers-contact {
+    background-image: url('https://res.cloudinary.com/darkroast-digital/image/upload/v1510152415/fortis/careers-contact-bg.jpg');
+
+        .hp-contact-content {
+        flex-direction: column;
+    }
+
+    .hp-form {
+        width: 100%;
+    }
+}
+
+//
+//
+// Contact
+//
+//
+
+.contact-hero {
+    background-image: url('https://res.cloudinary.com/darkroast-digital/image/upload/v1510152415/fortis/contact-hero.jpg');
+    background-position: center 30%;
+
+    @include mq(s) {
+        .hero__content-background {
+            height:150px !important;
+            margin-top:50px !important;
+        }
+    }
+}
+
+.contact-content {
+    @include row();
+    margin-bottom: 2rem;
+
+    aside {
+        width: 35%;
+        padding-bottom: 2rem;
+
+        @include mq(m) {
+            width: 100%;
+            text-align: center;
+        }
+
+        h6 {
+            margin: 0;
+            font-weight: normal;
+            color: $c-primary;
+        }
+
+        h4 {
+            margin-top: 0;
+            font-weight: normal;
+            color: $c-grey-darker;
+        }
+
+        ul {
+            width: 100%;
+        }
+
+        li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+
+            @include mq(m) {
+                display: block;
+                text-align: center;
+                font-size: .75rem;
+                flex: 1 1 auto;
+            }
+
+            .contact-icon {
+                text-align: center;
+            }
+
+                div {
+                   width: 20%; 
+
+                   @include mq(m) {
+                    width: 100%;
+                   }
+
+                   img {
+                    max-height: 50px;
+                    max-width: 50px;
+                   }
+
+                   &:last-of-type {
+                    width: 80%;
+                   }
+                }
+        }
+    }
+
+    article {
+        width: calc(65% - 2rem);
+        margin-left: 2rem;
+        padding: 2rem;
+        height: 500px;
+
+        @include mq(m) {
+            width: 100%;
+            margin-left: 0;
+        }
+    }
+}
+
+
+.contact-contact {
+
+    .hp-contact-content {
+        display: block;
+    }
+
+    .hp-form {
+        width: 100%;
+        padding-top: 0;
+    }
+}
+
+//
+//
+// News
+//
+//
+
+.news-hero {
+    background-image: url('https://res.cloudinary.com/darkroast-digital/image/upload/v1510152415/fortis/news-hero.jpg');
+    background-position: center 30%;
+}
+
+.news-content {
+    @include container();
+
+    hr {
+        border-color: $c-grey;
+        margin-bottom: $vertical-rhythm;
+    }
+}
+
+.news-title {
+    margin-bottom: $vertical-rhythm;
+    
+    h4 {
+            font-weight: normal;
+            color: $c-grey-darker;
+            margin-bottom: 0;
+            margin-top: .5rem;
+            font-size: $h3;
+        }
+
+    h6 {
+        margin-top: 0;
+        margin-bottom: 0;
+        color: $c-primary;
+        text-transform: none;
+        font-weight: normal;
+    }
+}
+
+.post {
+    display: flex;
+    align-items: flex-start;
+    padding-bottom: $vertical-rhythm;
+
+    @include mq(m) {
+        display: block;
+    }
+
+    h4 {
+        font-weight: normal;
+        color: $c-primary;
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+
+    .post-image {
+        width: 25%;
+
+        @include mq(m) {
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .post-content {
+        width: calc(75% - 2rem);
+        margin-left: 2rem;
+
+        @include mq(m) {
+            width: 100%;
+            margin-left: 0;
+        }
+    }
+}
+
+.posts-container {
+    display: flex;
+    align-items: center;
+
+    @include mq(m) {
+        display: block;
+    }
+
+    article {
+        width: calc(75% - 2rem);
+        margin-right: 2rem;
+
+        @include mq(m) {
+            width: 100%;
+        }
+
+        @inlcude mq(m) {
+            width: 100%;
+            margin-right: 0;
+        }
+    }
+
+    aside {
+        width: 25%;
+        background: $c-grey-lightest;
+        padding: 1rem;
+
+        @include mq(m) {
+            width: 100%;
+        }
+    }
+}
+
+.news-social {
+    @include row();
+    padding-bottom: 2rem;
+
+    @include mq(m) {
+        padding-top: 2rem;
+        padding-bottom: 4rem;
+    }
+
+    .news-title {
+        margin-bottom: 0;
+        @include flex-right();
+    }
+}
+
+.news-social-nav {
+        display: flex;
+        background: $c-grey-lightest;
+        width: 30%;
+        align-items: center;
+        margin-left: 1rem;
+
+        @include mq(m) {
+            width: 100%;
+        }
+
+        li {
+            flex: 1 1 auto;
+        }
+
+        a {
+            text-transform: uppercase;
+            display: block;
+            padding: 1rem;
+            color: $c-grey;
+            @include transition();
+
+            i {
+                font-size: 1.5rem;
+            }
+
+            &:hover {
+                color: $c-primary;
+            }
+        }
+    }
+
+//
+//
+// Projects
+//
+//
+
+
+
+.projects-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    background: $c-white;
+    position: relative;
+    z-index: 10;
+
+    @include mq(m) {
+        display: block;
+
+        li {
+            padding: 1rem;
+        }
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: -100px;
+        transform: translateY(-50%);
+        height: 1px;
+        width: 100px;
+        background: $c-grey;
+        z-index: -10;
+    }
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: -100px;
+        transform: translateY(-50%);
+        height: 1px;
+        width: 100px;
+        background: $c-grey;
+        z-index: -10;
+    }
+
+    li {
+        flex: 1 1 auto;
+        text-align: center;
+        background: $c-white;
+        cursor: pointer;
+        position: relative;
+        margin: 0 1rem;
+        font-weight: bold;
+        @include transition($e: $easeOutCirc);
+
+        span {
+            position: absolute;
+            display: block;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+
+            &:before {
+                content: '';
+                position: absolute;
+                top: -5px;
+                left: 0;
+                height: 30px;
+                width: 1px;
+                background: $c-primary;
+                transform: scaleY(0);
+                @include transition($e: $easeOutCirc);
+                transition-delay: 200ms;
+                transform-origin: top;
+            }
+
+            &:after {
+                content: '';
+                position: absolute;
+                bottom: -5px;
+                right: 0;
+                height: 30px;
+                width: 1px;
+                background: $c-primary;
+                transform: scaleY(0);
+                @include transition($e: $easeOutCirc);
+                transition-delay: 200ms;
+                transform-origin: bottom;
+            }           
+        }
+
+        &:before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: 0;
+            height: 1px;
+            width: 40px;
+            background: $c-primary;
+            transform: scaleX(0);
+            @include transition($e: $easeOutCirc);
+            transform-origin: left;
+        }
+
+        &:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            height: 1px;
+            width: 40px;
+            transform: scaleX(0);
+            background: $c-primary;
+            @include transition($e: $easeOutCirc);
+            transform-origin: right;
+        }
+    }
+
+    .is--active {
+        color: $c-primary;
+
+        span {
+            
+            &:before,
+            &:after {
+                transform: none;
+            }
+        }
+
+        &:before {
+            transform: none;
+        }
+
+        &:after {
+            transform: none;
+        }
+    }
+}
+
+.projects-hero {
+    background-image: url('https://res.cloudinary.com/darkroast-digital/image/upload/v1510152415/fortis/project-hero.jpg');
+
+    @include mq(s) {
+        .hero__content {
+            max-width:100% !important;
+
+            &-background {
+                width:70% !important;
+                height:40% !important;
+                margin-top:40px !important;
+            }
+        }
+    }
+}
+
+.projects-content {
+    @include container();
+
+    @include mq(s) {
+        overflow-x:hidden;
+        margin:0;
+        max-width:100%;
+    }
+}
+
+.project-category {
+    padding-bottom: 2rem;
+    opacity: 0;
+    @include transition();
+
+    @supports (display: -webkit-flex) or
+          (display: -moz-flex) or
+          (display: flex) {
+
+
+    generate-grid:
+    columns(1/2 1/4 1/4, 1/4 1/2 1/4)
+    rows(250px 250px 250px, 500px 500px 500px);
+}
+
+    > div {
+
+        @include mq(m) {
+            width: 100% !important;
+            margin: 0 !important;
+            margin-bottom: 2rem !important;
+        }
+    }
+}
+
+.image-1,
+.image-2,
+.image-3,
+.image-4,
+.image-5,
+.image-6,
+.image-7,
+.image-8,
+.image-9 {
+    transform: translateY(40px);
+    opacity: 0;
+    @include transition();
+    
+    img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+
+    }
+}
+
+.project-category.is--active {
+    opacity: 1;
+
+    .image-1,
+    .image-2,
+    .image-3,
+    .image-4,
+    .image-5,
+    .image-6,
+    .image-7,
+    .image-8,
+    .image-9 {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.image-grid {
+
+    @supports (display: -webkit-flex) or
+          (display: -moz-flex) or
+          (display: flex) {
+    generate-grid:
+        columns(1/2 1/2, 1/1)
+        rows(250px 250px, 250px);
+        overflow: hidden;
+    }
+}
+
+#tab1 {
+
+    .image-7 {
+
+        img {
+            object-position: bottom center;
+        }
+    }
+}
+
+#tab2 {
+    @supports (display: -webkit-flex) or
+          (display: -moz-flex) or
+          (display: flex) {
+    gg:
+        columns(1/4 1/2 1/4, 1/2 1/4 1/4)
+        rows(500px 500px 530px, 250px 250px 250px);
+    }
+
+    .grid-split {
+        @supports (display: -webkit-flex) or
+          (display: -moz-flex) or
+          (display: flex) {
+        gg:
+            columns(1/1, 1/1)
+            rows(250px, 250px);
+        }
+    }
+
+    .grid {
+        @supports (display: -webkit-flex) or
+          (display: -moz-flex) or
+          (display: flex) {
+        gg:
+            columns(1/2 1/2, 1/1)
+            rows(250px 250px, 250px);
+        }
+
+            @include mq(m) {
+                display: block;
+                
+                > div {
+                    width: 100% !important;
+                    margin-left: 0 !important;
+                }
+            }
+    }
+}
+
+#tab3 {
+    @supports (display: -webkit-flex) or
+          (display: -moz-flex) or
+          (display: flex) {
+    generate-grid:
+        columns(1/2 1/2, 1/4 3/4)
+        rows(250px 250px, 500px 500px);
+    }
+
+    .image-grid {
+        @supports (display: -webkit-flex) or
+          (display: -moz-flex) or
+          (display: flex) {
+        gg:
+            columns(2/3 1/3, 1/3 2/3)
+            rows(250px 250px, 250px 250px);
+        }
+
+            @include mq(m) {
+                display: block;
+                
+                > div {
+                    width: 100% !important;
+                    margin-left: 0 !important;
+                }
+            }
+    }
+}
+
+#tab4 {
+    @supports (display: -webkit-flex) or
+          (display: -moz-flex) or
+          (display: flex) {
+    generate-grid:
+        columns(1/2 1/4 1/4, 1/4 1/2 1/4)
+        rows(250px 250px 250px, 500px 500px 500px);
+    }
+
+        .grid-1 {
+            .top,
+            .bottom {
+                height: 50%;
+
+                .project-image,
+                img {
+                    height: 100%;
+                }
+            }
+
+            .top {
+                height: calc(50% - 30px);
+                margin-bottom: 30px;
+            }
+
+            .bottom {
+                @supports (display: -webkit-flex) or
+          (display: -moz-flex) or
+          (display: flex) {
+                generate-grid:
+                    columns(1/2 1/2);
+                }
+            }
+        }
+}
+
+#tab5 {
+    @supports (display: -webkit-flex) or
+          (display: -moz-flex) or
+          (display: flex) {
+    generate-grid:
+        columns(1/4 3/4, 1/2 1/2)
+        rows(530px 500px, 250px 250px);
+    }
+
+        .grid {
+            @supports (display: -webkit-flex) or
+          (display: -moz-flex) or
+          (display: flex) {
+            gg:
+                columns(1/3 2/3, 2/3 1/3)
+                rows(250px 250px, 250px 250px);
+            }
+
+                @include mq(m) {
+                display: block;
+                
+                > div {
+                    width: 100% !important;
+                    margin-left: 0 !important;
+                }
+            }
+        }
+}
+
+#tab6 {
+    @supports (display: -webkit-flex) or
+          (display: -moz-flex) or
+          (display: flex) {
+    generate-grid:
+        columns(1/4 1/4 1/2, 3/4 1/4)
+        rows(250px 250px 250px, 500px 530px);
+    }
+
+        .grid {
+            @supports (display: -webkit-flex) or
+          (display: -moz-flex) or
+          (display: flex) {
+            gg:
+                columns(2/3 1/3, 1/3 2/3)
+                rows(250px 250px, 250px 250px);
+            }
+
+            @include mq(m) {
+                display: block;
+                
+                > div {
+                    width: 100% !important;
+                    margin-left: 0 !important;
+                }
+            }
+        }
+}
+
+.projects-clients {
+    @include container();
+    padding: 2rem 0;
+
+    img {
+        max-width: 100%;
+        padding: 2rem;
+    }
+}
+
+.client-title {
+    h4 {
+            font-weight: normal;
+            color: $c-grey-darker;
+            margin-bottom: 0;
+            margin-top: .5rem;
+            font-size: $h3;
+        }
+
+    h6 {
+        margin-top: 0;
+        margin-bottom: 0;
+        color: $c-primary;
+        text-transform: none;
+        font-weight: normal;
+    }
+}
+
+.projects-cta {
+    padding: 4rem;
+    @include cover();
+    background-image: url('https://res.cloudinary.com/darkroast-digital/image/upload/v1510152415/fortis/projects-cta.jpg');
+    @include row();
+    margin-top: 4rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $c-white;
+    flex-direction: column;
+
+    @include mq(m) {
+        display: block;
+        text-align: center;
+        padding: 2rem;
+    }
+
+    @include mq(s) {
+        overflow-x:hidden;
+    }
+
+    h4 {
+        span {
+            display: block;
+        }
+
+        @include mq(m) {
+            margin-top: 0;
+        }
+    }
+
+    p {
+        max-width: 50%;
+
+        @include mq(m) {
+            max-width: 100%;
+        }
+    }
+
+    .button-group {
+        position: relative;
+
+        &:before,
+        &:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100px;
+            height: 1px;
+            background: $c-white;
+        }
+
+        &:before {
+            left: -120px;
+        }
+
+        &:after {
+            right: -120px;
+        }
+    }
+
+    .button {
+        @include button(secondary);
+        border: none;
+        color: $c-white;
+
+        &:after,
+        &:before {
+            background: $c-white;
+        }
+
+        span {
+            &:after,
+            &:before {
+                background: $c-white;
+            }
+        }
+    }
+}
+
+.spacer {
+    padding: 2rem;
+}
+
+.projects-items {
+
+    .project-image {
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        
+        &:before {
+            content: attr(data-project);
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            z-index: 10;
+            color: $c-white;
+            font-size: $h5;
+            text-transform: uppercase;
+            font-weight: bold;
+            transform: translateY(5rem);
+            @include transition($e: cubic-bezier(0.72, 0, 0, 1), $t: 500ms);
+        }
+
+        &:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 33%;
+            width: 100%;
+            background: rgba($c-primary, .8);
+            pointer-events: none;
+            transform: translateY(100%);
+            @include transition($e: cubic-bezier(0.72, 0, 0, 1), $t: 500ms);
+        }
+
+        &:hover {
+
+            &:before,
+            &:after {
+                transform: translateY(0);
+            }
+        }
+    }
+}
+
+.lightbox {
+    position: fixed;
+    height: 100vh !important;
+    width: 100vw !important;
+    z-index: 85;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    height: auto;
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include transition();
+    pointer-events: none;
+
+    &-content {
+        max-width: 800px;
+        max-height: 700px;
+        transform: translateY(60px);
+        @include transition();
+        overflow-y: hidden;
+
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
+            object-position: center;
+            @include shadow(heavier);
+        }
+    }
+}
+
+.lightbox-content {
+
+    img[src="../assets/img/cat6/1.jpg"] {
+        //max-width: 70%;
+        text-align: center;
+    }
+}
+
+.lightbox.is--active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: none;
+
+    .lightbox-content {
+        transform: translateY(0);
+    }
+}
+
+.lightbox-title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 1rem 1rem 0;
+    color: $c-white;
+    text-shadow: 0 0 5px rgba($c-black, .8);
+}
+
+.overlay {
+    position: fixed;
+    z-index: 80;
+    top: 0;
+    left: 0;
+    background: rgba($c-grey-darkest, .9);
+    height: 100vh;
+    width: 100vw;
+}
+
+.overlay.is--active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+}
+
+.lightbox-arrow {
+    position: absolute;
+    cursor: pointer;
+    padding: 1rem;
+    top: 45vh;
+    font-size: $h1;
+    pointer-events: all;
+    color: $c-white;
+}
+
+.lightbox-prev {
+    left: 15vh; 
+}
+
+.lightbox-next {
+    right: 15vh;
+}
+
+//
+//
+// Single Project
+//
+//
+
+.project-content {
+    @include row();
+
+    .project-description {
+        width: calc(75% - 2rem);
+
+        @include mq(m) {
+            width: 100%;
+        }
+    }
+}
+
+.project-details {
+
+    @include mq(m) {
+        margin-bottom: 2rem;
+    }
+    
+    li {
+        margin-bottom: .5rem;
+    }
+
+    strong {
+        margin-right: .75rem;
+    }
+
+    h6 {
+
+        @include mq(m) {
+            margin-top: 0;
+        }
+    }
+}
+
+.project-gallery {
+    @include row();
+    height: 500px;
+    padding-bottom: 3rem;
+
+    .gallery-image-large {
+        width: calc(75% - 1rem);
+        height: 100%;
+        margin-right: 1rem;
+
+        @include mq(m) {
+            width: 100%;
+            height: 300px;
+            margin-bottom: 1rem;    
+        }
+    }
+
+    .gallery-image-split {
+        width: 25%;
+        height: 100%;
+
+        @include mq(m) {
+            width: 100%;
+            height: 200px;
+            display: flex;
+        }
+    }
+
+    .split-image {
+        height: 50%;
+
+        @include mq(m) {
+            height: 100%;
+            width: 50%;
+        }
+
+        &:first-of-type {
+            padding-bottom: 1rem;
+
+            @include mq(m) {
+                padding-bottom: 0;
+                margin-right: 1rem;
+            }
+        }
+    }
+
+    img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+}
+
+.project-info {
+    @include container();
+    padding-bottom: 6rem;
+
+    @include mq(m) {
+        padding-top: 3rem;
+    }
+    
+    .info-image {
+        height: 400px;
+        width: 100%;
+
+        @include mq(m) {
+            padding-bottom: 3rem;
+        }
+
+        img {
+            object-fit: cover;
+            height: 100%;
+            width: 100%;
+        }
+    }
+}
+
+//
+//
+// WFCU
+//
+//
+
+.wfcu-hero {
+    background-image: url('https://res.cloudinary.com/darkroast-digital/image/upload/v1510155017/fortis/wfcu/hero.jpg');
+}
+
+//
+//
+// EQ3
+//
+//
+
+.eq3-hero {
+    background-image: url('https://res.cloudinary.com/darkroast-digital/image/upload/v1510154225/fortis/eq3/hero.jpg');
+}
+
+//
+//
+// MEC
+//
+//
+
+.mec-hero {
+    background-image: url('https://res.cloudinary.com/darkroast-digital/image/upload/v1510154737/fortis/mec/hero.jpg');
+}
+
+//
+//
+// Cavalier
+//
+//
+
+.cavalier-hero {
+    background-image: url('https://res.cloudinary.com/darkroast-digital/image/upload/v1510153998/fortis/cavalier/hero.jpg');
+}
+
+//
+//
+// Infrastructure
+//
+//
+
+.infrastructure-hero {
+    background-image: url('https://res.cloudinary.com/darkroast-digital/image/upload/v1510154508/fortis/infrastructure/hero.jpg');
+}
+
+//
+//
+// Windsor Regional
+//
+//
+
+.windsor-regional-hero {
+    background-image: url('https://res.cloudinary.com/darkroast-digital/image/upload/v1510155075/fortis/windsor-regional/hero.jpg');
+}
+
+//
+//
+// Infiniti
+//
+//
+
+.infiniti-hero {
+    background-image: url('https://res.cloudinary.com/darkroast-digital/image/upload/v1510154335/fortis/infiniti/hero.jpg');
+}
+
+//
+//
+// Community Page
+//
+//
+
+.community {
+    padding-bottom: 2rem;
+}
+
+.community-hero {
+    background-image: url('https://res.cloudinary.com/darkroast-digital/image/upload/v1510152415/fortis/community-hero-new.jpg');
+    background-position: center 20%;
+
+    @include mq(s) {
+        .hero__content-background {
+            height:150px !important;
+            margin-top:40px !important;
+        }
+    }
+}
+
+.community-content {
+    @include row(80%);
+    flex-direction: column;
+
+    h4 {
+        margin-top: 0;
+    }
+
+    > h4 {
+        position: relative;
+
+        &:after {
+            content: '';
+            position: absolute;
+            z-index: 70;
+            top: 50%;
+            right: -250px;
+            height: 1px;
+            width: 500px;
+            background: $c-grey-light;
+
+            @include mq(m) {
+                display: none;
+            }
+        }
+    }
+
+    .community-info {
+        max-width: 100%;
+        @include flex-right();
+        margin-right: 0rem;
+        display: flex;
+
+        @include mq(m) {
+            display: block;
+        }
+
+        .info-title {
+            margin-right: 2rem;
+            text-align: right;
+            width: 50%;
+
+            @include mq(m) {
+                width: 100%;
+                text-align: left;
+            }
+
+            h4 {
+                margin-top: 0;
+                font-size: $h6;
+
+            }
+            
+            span {
+                color: $c-primary;
+                display: block;
+            }
+        }
+
+        p {
+            width: 50%;
+
+            @include mq(m) {
+                width: 100%;
+            }
+        }
+    }
+
+    img {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+}
+
+.about-cta.alt {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+//
+//
+// Work CTA
+//
+//
+
+.drone-cta {
+    padding-top: 3rem;
+    @include row();
+
+    @include mq(m) {
+        display: block;
+        max-width: 100%;
+    }
+
+    @include mq(s) {
+        padding-right:0;
+        overflow-x:hidden;
+    }
+
+    a {
+        display: flex;
+        width: 100%;
+        height: 200px;
+        margin-right: 2rem;
+        position: relative;
+
+        @include mq(m) {
+            display: block;
+        }
+
+        &:after {
+            content: '';
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background: url('https://res.cloudinary.com/darkroast-digital/image/upload/v1510152414/fortis/drone-bg.jpg');
+            background-size: cover;
+            right: -30%;
+            z-index: -10;
+
+            @include mq(m) {
+                top: 0;
+                right: 0;
+                width: 200%;
+                margin-left: -5rem;
+            }
+        }
+        
+    }
+
+    .drone {
+
+        div {
+            display: flex;
+            margin-left: 2rem;
+            justify-content: center;
+            flex-direction: column;
+            color: $c-white;
+
+            @include mq(xl) {
+                margin-left: 12rem;
+            }
+
+            @include mq(m) {
+                display: block;
+                margin: 0;
+                text-align: center;
+            }
+
+            h5 {
+                font-size: $h3;
+                margin-bottom: .5rem;
+
+                @include mq(m) {
+                    padding-top: 2rem;
+                    line-height: 1;
+                }
+            }
+
+            p {
+                font-size: $h6;
+            }
+        }
+
+        img {
+            max-height: 200px;
+
+            @include mq(m) {
+                margin: 0;
+                display: none;
+            }
+        }
+    }
+}
+
+.brochure-cta {
+    padding-top: 3rem;
+    @include row();
+
+    @include mq(m) {
+        display: block;
+        max-width: 100%;
+    }
+
+    @include mq(s) {
+        overflow-x:hidden;
+    }
+
+    a {
+        display: flex;
+        width: 100%;
+        height: 200px;
+        margin-right: 2rem;
+        position: relative;
+
+        @include mq(m) {
+            display: block;
+        }
+
+        &:after {
+            content: '';
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background: url('https://res.cloudinary.com/darkroast-digital/image/upload/v1510152414/fortis/brochure-bg.jpg');
+            background-size: cover;
+            left: -30%;
+            z-index: -10;
+
+            @include mq(m) {
+                top: 0;
+                left: 0;
+                width: 200%;
+                margin-left: -5rem;
+            }
+        }
+        
+    }
+
+    .brochure {
+
+        div {
+            display: flex;
+            margin-left: 2rem;
+            text-align: right;
+            justify-content: center;
+            flex-direction: column;
+            color: $c-white;
+            @include flex-right();
+            margin-right: -12rem;
+
+            @include mq(m) {
+                display: block;
+                margin: 0;
+                text-align: center;
+            }
+
+            h5 {
+                font-size: $h3;
+                margin-bottom: .5rem;
+
+                @include mq(m) {
+                    padding-top: 2rem;
+                    line-height: 1;
+                }
+            }
+
+            p {
+                font-size: $h6;
+            }
+        }
+
+        img {
+            max-height: 200px;
+            margin-right: -3rem;
+            @include flex-right();
+
+            @include mq(m) {
+                margin: 0;
+                display: none;
+            }
+        }
+    }
+}
+
+.tour-hero {
+    background-image: url('https://res.cloudinary.com/darkroast-digital/image/upload/v1510152414/fortis/tour-hero.jpg');
+}
+
+.tour-content {
+    @include container();
+
+    .tour-copy {
+        width: calc(70% - 2rem);
+
+        @include mq(m) {
+            width: 100%;
+        }
+    }
+
+    .tour-tours {
+        display: flex;
+        padding-bottom: 3rem;
+
+        @include mq(m) {
+            display: block;
+        }
+
+        iframe {
+            margin-right: 1rem;
+
+            &:last-of-type {
+                margin-right: 0;
+            }
+        }
+    }
+}
+
+.tour-cta {
+    padding: 4rem;
+    @include cover();
+    background-image: url('https://res.cloudinary.com/darkroast-digital/image/upload/v1510152414/fortis/tour-bg.jpg');
+    @include row();
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $c-white;
+    flex-direction: column;
+
+    @include mq(m) {
+        display: block;
+        text-align: center;
+        padding: 2rem;
+    }
+
+    @include mq(s) {
+        padding-left:0;
+        padding-right:0;
+        overflow-x:hidden;
+    }
+
+    h4 {
+        span {
+            display: block;
+        }
+
+        @include mq(m) {
+            margin-top: 0;
+        }
+    }
+
+    p {
+        max-width: 50%;
+
+        @include mq(m) {
+            max-width: 100%;
+        }
+    }
+
+    .button-group {
+        position: relative;
+
+        &:before,
+        &:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100px;
+            height: 1px;
+            background: $c-white;
+        }
+
+        &:before {
+            left: -120px;
+        }
+
+        &:after {
+            right: -120px;
+        }
+    }
+
+    .button {
+        @include button(secondary);
+        border: none;
+        color: $c-white;
+
+        &:after,
+        &:before {
+            background: $c-white;
+        }
+
+        span {
+            &:after,
+            &:before {
+                background: $c-white;
+            }
+        }
+    }
+}
+
+//
+//
+// Drone Content
+//
+//
+
+.drone-hero {
+    background-image: url('https://res.cloudinary.com/darkroast-digital/image/upload/v1510152414/fortis/drone-hero.jpg');
+}
+
+.drone-content {
+    @include container();
+    padding-bottom: 3rem;
+
+    div {
+        margin-right: 2rem;
+
+        &:first-of-type {
+            width: 65%;
+        }
+
+        &:last-of-type {
+            display: flex;
+            flex-wrap: wrap;
+
+            iframe {
+                width: 31.3333%;
+                margin-right: 1rem;
+                margin-bottom: 1rem;
+
+                &:last-of-type {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+}
+
+//
+//
+// Instafeed
+//
+//
+
+#instafeed {
+    width: 100%;
+}
+
+#instafeed a {
+    display: block;
+    width: 100%;
+    height: 200px;
+    margin: 1rem 0;
+    transition: all 200ms ease-out;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+
+    img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    i {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      color: #fff;
+      z-index: 10;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      transition: all 300ms ease-out;
+      opacity: 0;
+      transform: translateY(50px);
+      transition-delay: 100ms;
+    }
+    
+    &:after {
+      content: '';
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: rgba(0,0,0,.8);
+      transition: all 300ms ease-in-out;
+      opacity: 0;
+    }
+}
+
+.instagram {
+    margin-bottom: 2rem;
+}
+
+.fix-image {
+    display: none !important;
+}
+
+.four-oh-four {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-image: url('https://res.cloudinary.com/darkroast-digital/image/upload/v1510152414/fortis/404.jpg');
+    background-size: 60%;
+    background-position: right bottom;
+
+    h1 {
+        margin-top: 10rem;
+    }
+
+    a {
+        color: $c-primary;
+        font-weight: bold;
+        font-size: $h5;
+    }
+}
+
+//
+//
+//
+//
+//
+
+.infiniti-left {
+    object-position: left;
+}
+
+.contact-contact {
+    background-image: url('https://res.cloudinary.com/darkroast-digital/image/upload/v1510152414/fortis/contact-bg.jpg');
+}
+
+.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}

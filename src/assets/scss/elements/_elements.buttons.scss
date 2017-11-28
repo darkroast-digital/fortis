@@ -1,0 +1,236 @@
+//
+//
+// Buttons
+//
+//
+
+@mixin button($button, $bg: $c-primary, $c: $c-white) {
+  @if $button == flat {
+   	position: relative;
+   	display: inline-block;
+		padding: .5rem 2.5rem;
+		color: $bg;
+		font-family: $g-font-one;
+		font-weight: 600;	
+		@include transition($e: $easeOutCirc);
+		transition-delay: 100ms;
+		text-transform: uppercase;
+		position: relative;
+
+		&:before {
+			content: '';
+			position: absolute;
+			top: -5px;
+			left: 0;
+			height: 1px;
+			width: 100%;
+			background: $bg;
+			@include transition($e: $easeOutCirc);
+		}
+
+		&:after {
+			content: '';
+			position: absolute;
+			bottom: -5px;
+			right: 0;
+			height: 1px;
+			width: 100%;
+			background: $bg;
+			@include transition($e: $easeOutCirc);
+		}
+		
+		&:hover {
+
+			&:before {
+				width: 40px;
+			}
+			
+			&:after {
+				width: 40px;
+			}
+		}
+  }
+	
+  @else if $button == secondary {
+	   	position: relative;
+	   	display: inline-block;
+		padding: .5rem 2.5rem;
+		color: $bg;
+		font-family: $g-font-one;
+		font-weight: 600;	
+		@include transition($e: $easeOutCirc);
+		transition-delay: 100ms;
+		text-transform: uppercase;
+		border: solid 20px $c-white;
+
+		span {
+			position: absolute;
+			display: block;
+			top: 0;
+			left: 0;
+			height: 100%;
+			width: 100%;
+
+			&:before {
+				content: '';
+				position: absolute;
+				top: -5px;
+				left: 0;
+				height: 30px;
+				width: 1px;
+				background: $bg;
+				@include transition($e: $easeOutCirc);
+				transition-delay: 200ms;
+				transform-origin: top;
+			}
+
+			&:after {
+				content: '';
+				position: absolute;
+				bottom: -5px;
+				right: 0;
+				height: 30px;
+				width: 1px;
+				background: $bg;
+				@include transition($e: $easeOutCirc);
+				transition-delay: 200ms;
+				transform-origin: bottom;
+			}			
+		}
+
+		&:before {
+			content: '';
+			position: absolute;
+			top: -5px;
+			left: 0;
+			height: 1px;
+			width: 40px;
+			background: $bg;
+			@include transition($e: $easeOutCirc); 
+		}
+
+		&:after {
+			content: '';
+			position: absolute;
+			bottom: -5px;
+			right: 0;
+			height: 1px;
+			width: 40px;
+			background: $bg;
+			@include transition($e: $easeOutCirc);
+		}
+		
+		&:hover {
+
+			&:before {
+				width: 0;
+			}
+			
+			&:after {
+				width: 0;
+			}
+
+			span {
+
+				&:before {
+					transform: scaleY(0);
+				}
+			
+				&:after {
+					transform: scaleY(0);
+				}				
+			}
+		}
+  }
+	
+	@else if $button == shadow {
+		position: relative;
+   	display: inline-block;
+		padding: .5rem 2.5rem;
+		border-radius: 3px;
+		color: $c;
+		font-family: $g-font-one;
+		font-weight: 600;
+		background: $bg;	
+		border: solid 1px $bg;
+		@include transition($e: $easeInOutQuad);
+		text-transform: uppercase;
+		@include shadow(normal);
+		
+		&:hover {
+			background: $c-grey-dark;
+			border-color: $c-grey-dark;
+			color: $c;
+		}
+  }
+	
+	@else if $button == ghost {
+		position: relative;
+   	display: inline-block;
+		padding: .5rem 2.5rem;
+		border-radius: 3px; 
+		color: $c-primary;
+		font-family: $g-font-one;
+		font-weight: 600;
+		background: transparent;	
+		border: solid 1px $bg;
+		@include transition($e: $easeInOutQuad);
+		text-transform: uppercase;
+		
+		&:hover {
+			background: $bg;
+			border-color: $bg;
+			color: $c;
+		}
+  }
+	
+		@else if $button == invisible {
+		position: relative;
+   	display: inline-block;
+		padding: .5rem 2.5rem;
+		border-radius: 3px;
+		color: $c;
+		font-family: $g-font-one;
+		font-weight: 600;
+		background: transparent;	
+		border: solid 1px transparent;
+		@include transition($e: $easeInOutQuad);
+		text-transform: uppercase;
+		
+		&:hover {
+			color: $c-font;
+		}
+  }
+}
+
+//
+//
+// Decalre Buttons
+//
+//
+
+.button {
+	@include button(flat);
+}
+
+.button-raised {
+	@include button(raised)
+}
+
+.button-shadow {
+	@include button(shadow)
+}
+
+.button-ghost {
+	@include button(ghost)
+}
+
+.button-ghost {
+	@include button(invisible)
+}
+
+button {
+	@include button(flat);
+	outline: none;
+	cursor: pointer;
+}
