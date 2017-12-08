@@ -22,7 +22,8 @@
     "postcss-ant": "^1.2.1"
   },
   "dependencies": {
-
+    "gulp-htmlmin": "^3.0.0",
+    "mocha": "^4.0.1"
   },
   "description": ""
 }

@@ -9,12 +9,15 @@ const postcss = require('gulp-postcss');
 const sass = require('gulp-sass');
 const ant = require('postcss-ant');
 const autoprefixer = require('autoprefixer');
+const htmlmin = require('gulp-htmlmin');
 
 var paths = {
 	scss: './src/assets/scss/**/*.scss',
 	es: './src/assets/js/*.js',
 	css: './build/assets/css',
 	php: './build/site/*.php',
+    htmlTemp: './build/site/templates/*.php',
+    htmlSnip: './build/site/snippets/*.php',
 	bundle: './build/assets/js/',
 	js: './build/assets/js/bundle.js'
 };
@@ -63,7 +66,25 @@ gulp.task('sass', () => {
 		}));
 });
 
-gulp.task('serve', ['sass', 'scripts'], () => {
+gulp.task('minifyCss', function(){
+    return gulp.src('./build/assets/css/main.css')
+        .pipe(htmlmin({collapseWhitespace: true}, {minifyCss: true}))
+        .pipe(gulp.dest('./build/assets/css'));
+});
+
+gulp.task('minifyHtmlTemp', function(){
+    return gulp.src(paths.htmlTemp)
+        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(gulp.dest('./build/site/templates'));
+});
+
+gulp.task('minifyHtmlSnip', function(){
+    return gulp.src(paths.htmlSnip)
+        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(gulp.dest('./build/site/snippets'));
+});
+
+gulp.task('serve', ['sass', 'scripts', 'minifyCss', 'minifyHtmlTemp', 'minifyHtmlSnip'], () => {
 	
 	connect.server({
 		port: '8080',
@@ -75,6 +96,9 @@ gulp.task('serve', ['sass', 'scripts'], () => {
 		
 		gulp.watch(paths.scss, ['sass']);
 		gulp.watch(paths.es, ['scripts']);
+        gulp.watch('./build/assets/css/main.css', ['minifyCss']);
+        gulp.watch(paths.htmlTemp, ['minifyHtmlTemp']);
+        gulp.watch(paths.htmlSnip, ['minifyHtmlSnip']);
 		gulp.watch(paths.php).on('change', reload);
 	});
 });
